@@ -13,35 +13,35 @@ const JobDetails = ({ activeUntil, department, jobType, location, workLocationTy
     return (
         <Card.Root variant="outline" cursor="pointer" minW="330px" bg="white">
             <Card.Body p="1rem">
-                <Text color="#15211d" fontFamily="poppins" fontSize=".7rem" fontWeight="bold">
+                <Text color="#15211d" fontFamily="poppins" fontSize=".7rem" fontWeight="bold" mb="5px">
                     Active Until
                 </Text>
-                <Text fontFamily="poppins" fontSize=".9rem" mb="10px">
+                <Text fontFamily="poppins" fontSize=".9rem" mb="15px">
                     {moment(activeUntil).format('MMM DD, YYYY')}
                 </Text>
 
                 <Text color="#15211d" fontFamily="poppins" fontSize=".7rem" fontWeight="bold">
                     Department
                 </Text>
-                <Text fontFamily="poppins" fontSize=".9rem" mb="10px">
+                <Text fontFamily="poppins" fontSize=".9rem" mb="15px">
                     {department}
                 </Text>
 
-                <Text color="#15211d" fontFamily="poppins" fontSize=".7rem" fontWeight="bold">
+                <Text color="#15211d" fontFamily="poppins" fontSize=".7rem" fontWeight="bold" mb="5px">
                     Job Type
                 </Text>
-                <Text fontFamily="poppins" fontSize=".9rem" mb="10px">
+                <Text fontFamily="poppins" fontSize=".9rem" mb="15px">
                     {jobType}
                 </Text>
 
-                <Text color="#15211d" fontFamily="poppins" fontSize=".7rem" fontWeight="bold">
+                <Text color="#15211d" fontFamily="poppins" fontSize=".7rem" fontWeight="bold" mb="5px">
                     Location
                 </Text>
-                <Text fontFamily="poppins" fontSize=".9rem" mb="10px">
+                <Text fontFamily="poppins" fontSize=".9rem" mb="15px">
                     {location}
                 </Text>
 
-                <Text color="#15211d" fontFamily="poppins" fontSize=".7rem" fontWeight="bold">
+                <Text color="#15211d" fontFamily="poppins" fontSize=".7rem" fontWeight="bold" mb="5px">
                     Workplace Type
                 </Text>
                 <Text fontFamily="poppins" fontSize=".9rem">

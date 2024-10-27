@@ -33,7 +33,7 @@ const Page = ({ params }: { params: { job: string } }) => {
                         </Flex>
                     </Link>
                     {details ? (
-                        <Box mt="40px">
+                        <Box mt="30px">
                             <Box height="50px" mb="10px">
                                 <Image src={getCompanyImage(details.company)} alt={details.company} display="block" height="100%" objectFit="unset" />
                             </Box>
