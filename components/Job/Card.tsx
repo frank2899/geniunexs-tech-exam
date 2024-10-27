@@ -4,12 +4,8 @@ import { Badge, Box, Card, Flex, Image, Text } from '@chakra-ui/react'
 import moment from 'moment'
 import { useRouter } from 'next/navigation'
 
-interface _ extends JobInterface {
-    _id?: string
-}
-
 interface JobCardInterface {
-    data: _
+    data: JobInterface
     redirect?: boolean
 }
 
