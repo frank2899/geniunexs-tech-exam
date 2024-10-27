@@ -1,0 +1,77 @@
+name: Code Lint and Tests
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    name: Lint and Code Quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache --check-cache
+
+      - name: Run code formatter
+        run: yarn format:check
+
+  test-unit:
+    name: Unit Tests
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache --check-cache
+
+      - name: Run unit tests runner
+        run: yarn test:unit
+
+  test-integration:
+    strategy:
+        fail-fast: false
+        matrix:
+          browser: [chrome, edge, firefox]
+    name: Integration Tests on '${{ matrix.browser }}' browser
+    runs-on: ubuntu-22.04
+    needs: test-unit
+    container:
+      image: cypress/browsers:node-20.14.0-chrome-126.0.6478.114-1-ff-127.0.1-edge-126.0.2592.61-1
+      options: --user 1001
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cypress run tests runner
+        uses: cypress-io/github-action@v6
+        with:
+          cache-key: "yarn-cache-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}"
+          browser: ${{ matrix.browser }}
+          install-command: yarn install --immutable --immutable-cache --check-cache
+          build: yarn build
+          start: yarn start
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 180
+          
+    
