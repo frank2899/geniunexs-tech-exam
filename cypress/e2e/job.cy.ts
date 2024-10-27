@@ -54,6 +54,6 @@ describe('Job Creation Page', () => {
     it('should not open the preview dialog if required fields are incomplete', () => {
         cy.get('#save-btn').click()
 
-        cy.get('[data-testid="job-preview-dialog"]').should('not.exist')
+        cy.get('#job-draft').should('not.exist')
     })
 })
