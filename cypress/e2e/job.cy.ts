@@ -57,3 +57,59 @@ describe('Job Creation Page', () => {
         cy.get('#job-draft').should('not.exist')
     })
 })
+
+describe('Job Edit Page', () => {
+    beforeEach(() => {
+        cy.visit('/')
+    })
+
+    it('should load the edit page with pre-filled data when update button is clicked', () => {
+        cy.get('.job-card')
+            .first()
+            .then(($card) => {
+                const jobId = $card.data('job-id')
+                cy.wrap($card).click()
+
+                cy.get('#update-job-btn').click()
+
+                cy.url().should('include', `/update/${jobId}`)
+
+                cy.get('select[name="company"]').should('not.have.value', '')
+                cy.get('input[name="title"]').should('not.have.value', '')
+                cy.get('input[name="summary"]').should('not.have.value', '')
+                cy.get('input[name="activeUntil"]').should('not.have.value', '')
+                cy.get('textarea[name="description"]').should('not.have.value', '')
+                cy.get('input[name="department"]').should('not.have.value', '')
+                cy.get('select[name="jobType"]').should('not.have.value', '')
+                cy.get('input[name="location"]').should('not.have.value', '')
+                cy.get('select[name="workLocationType"]').should('not.have.value', '')
+            })
+    })
+
+    it('should open the preview dialog when form is submitted with valid data', () => {
+        cy.get('.job-card')
+            .first()
+            .then(($card) => {
+                const jobId = $card.data('job-id')
+                cy.wrap($card).click()
+
+                cy.get('#update-job-btn').click()
+
+                cy.url().should('include', `/update/${jobId}`)
+
+                cy.get('select[name="company"]').should('not.have.value', '')
+                cy.get('input[name="title"]').should('not.have.value', '')
+                cy.get('input[name="summary"]').should('not.have.value', '')
+                cy.get('input[name="activeUntil"]').should('not.have.value', '')
+                cy.get('textarea[name="description"]').should('not.have.value', '')
+                cy.get('input[name="department"]').should('not.have.value', '')
+                cy.get('select[name="jobType"]').should('not.have.value', '')
+                cy.get('input[name="location"]').should('not.have.value', '')
+                cy.get('select[name="workLocationType"]').should('not.have.value', '')
+
+                cy.get('#save-btn').click()
+
+                cy.get('#job-update-preview').should('be.visible')
+            })
+    })
+})
