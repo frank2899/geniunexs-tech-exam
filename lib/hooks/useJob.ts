@@ -101,6 +101,46 @@ export const useJob = () => {
         }
     }
 
+    const editJob = async (id: string, job: JobInterface) => {
+        try {
+            setIsUpdating(true)
+            const api = await fetch(`/api/job/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(job),
+            })
+            const resp = await api.json()
+
+            const { data, error } = resp
+
+            if (error) {
+                toaster.create({
+                    title: 'Error Update',
+                    description: error,
+                    type: 'error',
+                })
+            }
+
+            if (data) {
+                toaster.create({
+                    title: 'Job Post Updated',
+                    type: 'success',
+                    duration: 5000,
+                })
+            }
+        } catch (error) {
+            toaster.create({
+                title: 'Error occured',
+                type: 'error',
+            })
+            console.log(`[Catch] Error while updating Job: ${error}`)
+        } finally {
+            setIsUpdating(false)
+        }
+    }
+
     return {
         jobs,
         filter,
@@ -111,5 +151,6 @@ export const useJob = () => {
         setJobFilter,
         viewJob,
         submitJob,
+        editJob,
     }
 }

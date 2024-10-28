@@ -1,4 +1,4 @@
-import { Box, Card, Text } from '@chakra-ui/react'
+import { Card, Text } from '@chakra-ui/react'
 import moment from 'moment'
 
 interface JobDetailsInteface {

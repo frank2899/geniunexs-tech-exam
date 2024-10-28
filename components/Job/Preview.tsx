@@ -4,9 +4,12 @@ import { BiEdit } from 'react-icons/bi'
 import { Prose } from '../Prose'
 import Markdown from 'react-markdown'
 import JobDetails from './Details'
+import { useRouter } from 'next/navigation'
 
 const JobPreview = ({ data }: { data: JobInterface }) => {
-    const { description, activeUntil, department, jobType, location, workLocationType } = data
+    const { _id, description, activeUntil, department, jobType, location, workLocationType } = data
+
+    const router = useRouter()
 
     return (
         <Box id="job-preview">
@@ -15,7 +18,15 @@ const JobPreview = ({ data }: { data: JobInterface }) => {
                     Job Description
                 </Text>
 
-                <Button outline="unset" background="#549285" size="xs" variant="solid" pr="13px">
+                <Button
+                    outline="unset"
+                    background="#549285"
+                    size="xs"
+                    variant="solid"
+                    pr="13px"
+                    onClick={() => router.push(`/update/${_id}`)}
+                    id="update-job-btn"
+                >
                     <BiEdit color="white" />
                     <Text fontFamily="poppins" fontSize=".9rem">
                         Edit

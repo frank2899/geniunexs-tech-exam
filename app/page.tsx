@@ -55,7 +55,7 @@ const Page = () => {
                 </Flex>
             </Flex>
 
-            {isFetching ? (
+            {isFetching && jobs.length === 0 ? (
                 <Grid templateColumns={{ base: '1fr', sm: '1fr 1fr', md: 'repeat(3, 1fr)' }} gap={[6, 10]}>
                     <Skeleton height="187.44px" />
                     <Skeleton height="187.44px" />
