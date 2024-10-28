@@ -2,11 +2,9 @@ import { JOB_TYPES_ENUM, JobInterface, WORK_PLACE_TYPE_ENUM } from '@/types/conf
 import { PaginateModel, Schema, model, Document, models } from 'mongoose'
 import mongoosePaginate from 'mongoose-paginate-v2'
 
-interface IJob_ extends JobInterface {
+interface IJob extends JobInterface {
     dateCreated: Date
 }
-
-interface IJob extends IJob_ {}
 
 const jobSchema = new Schema<IJob>({
     company: {
